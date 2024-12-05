@@ -10,7 +10,6 @@ def list():
     
     # データ取得
     statuses = Status.select()
-
     return render_template('status_list.html', title='ステータス一覧', items=statuses)
 
 
@@ -20,19 +19,19 @@ def add():
     total_at = 0
     total_df = 0
     if request.method == 'POST':
-        user_id = request.form['user_id']
-        item_id = request.form['item_id']
+        name = request.form['user_id']
+        item = request.form['item_id']
 
         # 選択されたユーザーと装備を取得
-        selected_user = User.get(User.id == user_id)
-        selected_item = Item.get(Item.id == item_id)
+        selected_user = User.get(User.id == name)
+        selected_item = Item.get(Item.id == item)
         
         # ユーザーのHPと装備のHPを計算または表示
         total_hp = int(selected_user.hp + selected_item.hitpoint)
         total_at = int(selected_user.at + selected_item.attack)
         total_df = int(selected_user.df + selected_item.defence)
 
-        Status.create(name=user_id, item=item_id, hp=total_hp, at=total_at, df=total_df)
+        Status.create(name=name, item=item, hp=total_hp, at=total_at, df=total_df)
         return redirect(url_for('status.list'))
     
     users = User.select()
