@@ -27,11 +27,13 @@ def index():
     for i in range(len(Status)):
        statuslist.append(Status.get(Status.id == i+1))
 
+    # デバッグ用
     #    print ("status:" + statuslist)
     
     # アイテム名だけをリストに収集
     items = [status.item.name for status in statuslist]
-    print (items)
+    ## デバッグ用
+    # print (items)
 
     swordcount = 0
     shieldcount = 0
@@ -50,10 +52,12 @@ def index():
         else:
             other += 1
     
+    # デバッグ用
     print (shieldcount)
     # 分母が0の場合の対策
     total_items = len(items)
-    print (total_items)
+    # デバッグ用
+    # print (total_items)
     if total_items == 0:
         swordratio = shieldratio = caneratio = otherratio = 0
     else:
@@ -67,10 +71,11 @@ def index():
         caneratio = math.floor(caneratio * 10) / 10
         otherratio = math.floor(otherratio * 10) / 10
 
-    print (swordratio)
-    print (shieldratio)
-    print (caneratio)
-    print (otherratio)
+    # デバッグ用
+    # print (swordratio)
+    # print (shieldratio)
+    # print (caneratio)
+    # print (otherratio)
 
     ratio = [swordratio, shieldratio, caneratio, otherratio]
 
