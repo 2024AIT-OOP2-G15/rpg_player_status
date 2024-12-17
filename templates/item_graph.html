@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>装備の使用率のグラフ</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
-    <!-- Chart.jsのCDNを追加 -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <header>
@@ -19,7 +17,7 @@
 
     <script>
         // グラフの生成
-        var ctx = document.getElementById('ItemChart').getContext('2d');
+        var ctx = document.getElementById('ItemChart').JSON.parse("{{ItemChart|tojson}}");
         var ItemChart = new Chart(ctx, {
             type: 'bar', // グラフの種類の変更
             data: c, //入れえたいデータ
