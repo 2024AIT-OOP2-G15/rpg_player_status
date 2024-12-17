@@ -2,15 +2,60 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>データ一覧</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='base-style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Chart</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+    <!-- Chart.jsのCDNを追加 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <h1>index</h1>
-    <ul>
-      <li><a href="{{ url_for('user.list') }}">ユーザーリスト</a></li>
-      <li><a href="{{ url_for('product.list') }}">製品リスト</a></li>
-      <li><a href="{{ url_for('order.list') }}">注文リスト</a></li>
-    </ul>
+    <header>
+        <h1 class="title">冒険者協会</h1>
+        <a class="user-list" href="{{ url_for('user.list') }}">冒険者リスト</a>
+        <a class="item-list" href="{{ url_for('item.list') }}">装備リスト</a>
+        <a class="status-list" href="{{ url_for('status.list') }}">総合ステータスリスト</a>
+    </header>
+    <canvas id="temperatureChart" width="400" height="200"></canvas>
+    <script>
+        // データの定義 (例: サーバー側のデータを埋め込む場合)
+        var data = {
+            labels: ['0:00', '1:00', '2:00', '3:00', '4:00', '5:00'], // 時間ラベル
+            datasets: [
+                {
+                    label: '温度',
+                    data: [15, 16, 14, 18, 20, 19], // 温度データ
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderWidth: 1
+                }
+            ]
+        };
+
+        // グラフの生成
+        var ctx = document.getElementById('temperatureChart').getContext('2d');
+        var temperatureChart = new Chart(ctx, {
+            type: 'bar', // グラフの種類の変更
+            data: data, //入れえたいデータ
+            options: {
+              //optionの追加　ここから下でグラフのサイズを設定できる
+                responsive: true,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: '時間'
+                        }
+                    },
+                    y: {
+                        beginAtZero: false,
+                        title: {
+                            display: true,
+                            text: '温度 (°C)'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 </html>

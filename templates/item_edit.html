@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>装備編集</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='base-style.css') }}">
+</head>
+<body>
+    <h1>装備を編集</h1>
+    <ul class="breadcrumb">
+        <li><a href="{{ url_for('index') }}">HOME</a></li>
+        <li><a href="{{ url_for('item.list') }}">装備一覧</a></li>
+        <li>装備編集</li>
+    </ul>
+
+    <form action="{{ url_for('item.edit', item_id=item.id) }}" method="post">
+        <label>装備名: <input type="text" name="name" value="{{ item.name }}" required></label><br>
+        <label>HP: <input type="number" step="1" name="hitpoint" value="{{ item.hitpoint }}" required></label><br>
+        <label>AT: <input type="number" step="1" name="attack" value="{{ item.attack }}" required></label><br>
+        <label>DF: <input type="number" step="1" name="defence" value="{{ item.defence }}" required></label><br>
+        <button type="submit">保存</button>
+    </form>
+</body>
+</html>

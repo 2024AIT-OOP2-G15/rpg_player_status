@@ -6,16 +6,18 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='base-style.css') }}">
 </head>
 <body>
-    <h1>新しいユーザーを追加</h1>
+    <h1>新しい冒険者を追加</h1>
     <ul class="breadcrumb">
         <li><a href="{{ url_for('index') }}">HOME</a></li>
-        <li><a href="{{ url_for('user.list') }}">ユーザー一覧</a></li>
-        <li>ユーザー登録</li>
+        <li><a href="{{ url_for('user.list') }}">冒険者一覧</a></li>
+        <li>冒険者登録</li>
     </ul>
 
     <form action="{{ url_for('user.add') }}" method="post">
         <label>名前: <input type="text" name="name" required></label><br>
-        <label>年齢: <input type="number" name="age" required></label><br>
+        <label>HP: <input type="number" name="hp" required></label><br>
+        <label>AT: <input type="number" name="at" required></label><br>
+        <label>DF: <input type="number" name="df" required></label><br>
         <button type="submit">追加</button>
     </form>
 </body>

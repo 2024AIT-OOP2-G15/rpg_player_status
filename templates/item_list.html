@@ -9,28 +9,28 @@
     <h1>{{ title }}</h1>
     <ul class="breadcrumb">
         <li><a href="{{ url_for('index') }}">HOME</a></li>
-        <li><a href="{{ url_for('user.list') }}">ユーザー一覧</a></li>
-    </ul>
+        <li><a href="{{ url_for('item.list') }}">装備一覧</a></li>
 
-    <a href="{{ url_for('user.add') }}">新規ユーザー追加</a>
+    </ul>
+    <a href="{{ url_for('item.add') }}">新規装備追加</a>
     <table>
         <thead>
             <tr>
                 <th>&nbsp;</th>
-                <th>名前</th>
+                <th>装備名</th>
                 <th>HP</th>
                 <th>AT</th>
                 <th>DF</th>
             </tr>
         </thead>
         <tbody>
-            {% for user in items %}
+            {% for item in items %}
             <tr>
-                <td><a href="{{ url_for('user.edit', user_id=user.id) }}">編集</a></td>
-                <td>{{ user.name }}</td>
-                <td>{{ user.hp }}</td>
-                <td>{{ user.at }}</td>
-                <td>{{ user.df }}</td>
+                <td><a href="{{ url_for('item.edit', item_id=item.id) }}">編集</a></td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.hitpoint }}</td>
+                <td>{{ item.attack }}</td>
+                <td>{{ item.defence }}</td>
             </tr>
             {% endfor %}
         </tbody>
