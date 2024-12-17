@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>装備の使用率のグラフ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+    <!-- Chart.jsのCDNを追加 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1 class="title">冒険者協会</h1>
+        <a class="user-list" href="{{ url_for('user.list') }}">冒険者リスト</a>
+        <a class="item-list" href="{{ url_for('item.list') }}">装備リスト</a>
+        <a class="status-list" href="{{ url_for('status.list') }}">総合ステータスリスト</a>
+    </header>
+    <canvas id="ItemChart" width="400" height="200"></canvas>
+
+    <script>
+        // グラフの生成
+        var ctx = document.getElementById('ItemChart').getContext('2d');
+        var ItemChart = new Chart(ctx, {
+            type: 'bar', // グラフの種類の変更
+            data: c, //入れえたいデータ
+            options: {
+              //optionの追加　ここから下でグラフのサイズを設定できる
+                responsive: true,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: '装備名'
+                        }
+                    },
+                    y: {
+                        beginAtZero: false,
+                        title: {
+                            display: true,
+                            text: '使用率'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
