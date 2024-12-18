@@ -13,14 +13,25 @@
         <a class="item-list" href="{{ url_for('item.list') }}">装備リスト</a>
         <a class="status-list" href="{{ url_for('status.list') }}">総合ステータスリスト</a>
     </header>
-    <canvas id="ItemChart" width="400" height="200"></canvas>
+
+    <main>
+        <div class="chart-container">
+            
+            <div class="chart_area">
+                <canvas id="Item_Chart"></canvas>
+            </div> 
+        </div>
+
+    </main>
 
     <script>
+        // データの取得
+        const item_data = JSON.parse('{{ item_data|tojson }}');
         // グラフの生成
-        var ctx = document.getElementById('ItemChart').JSON.parse("{{ItemChart|tojson}}");
-        var ItemChart = new Chart(ctx, {
+        var ctx = document.getElementById('Item_Chart').getContext('2d');
+        var Item_Chart = new Chart(ctx, {
             type: 'bar', // グラフの種類の変更
-            data: c, //入れえたいデータ
+            data: item_data, //入れえたいデータ
             options: {
               //optionの追加　ここから下でグラフのサイズを設定できる
                 responsive: true,
