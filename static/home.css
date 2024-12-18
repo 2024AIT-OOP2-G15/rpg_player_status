@@ -1,0 +1,74 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-bottom: 2px solid #ccc;
+}
+
+.title {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.menu {
+    text-decoration: none;
+    text-align: center;
+    padding: 10px;
+    font-size: 1rem;
+    color: #000;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.menu:hover {
+    background-color: #d0d0d0;
+    transform: translateY(-5px); 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); 
+}
+
+/* レスポンシブ設定 */
+@media screen and (max-width: 768px) {
+    .title {
+        font-size: 1.0rem;
+    }
+    .menu {
+        font-size: 0.5rem;
+    }
+}
+
+/* Chart Container */
+.chart-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 10px;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+
+@media screen and (max-width: 900px) {
+    .chart-container {
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        gap: 20px; 
+    }
+}
+
+.chart_area {
+    border: 1px solid black;
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+}

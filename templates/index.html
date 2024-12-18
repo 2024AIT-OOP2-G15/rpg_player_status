@@ -18,6 +18,7 @@
     
     
     <main>
+
         <div class="chart-container">
             
             <div class="chart_area">
@@ -47,7 +48,7 @@
         const total_status_elm = document.getElementById('total_status_chart').getContext('2d');
         // グラフの描画
         const totalStatusChart = new Chart(total_status_elm, total_status_data);
-
+      
         // データの取得
         const chara_use_data = JSON.parse('{{ chara_use_data|tojson }}');
         // グラフのエレメントの取得
