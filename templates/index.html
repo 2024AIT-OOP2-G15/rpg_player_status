@@ -2,15 +2,58 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>データ一覧</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='base-style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Chart</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+    <!-- Chart.jsのCDNを追加 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <h1>index</h1>
-    <ul>
-      <li><a href="{{ url_for('user.list') }}">冒険者リスト</a></li>
-      <li><a href="{{ url_for('item.list') }}">装備リスト</a></li>
-      <li><a href="{{ url_for('status.list') }}">総合ステータスリスト</a></li>
-    </ul>
+    <header class="header">
+        <h1 class="title">冒険者協会</h1>
+        <a class="menu user-list" href="{{ url_for('user.list') }}">冒険者リスト</a>
+        <a class="menu item-list" href="{{ url_for('item.list') }}">装備リスト</a>
+        <a class="menu status-list" href="{{ url_for('status.list') }}">総合ステータスリスト</a>
+    </header>
+    
+    
+    <main>
+        <div class="chart-container">
+            
+            <div class="chart_area">
+              <canvas id="Item_Chart"></canvas>
+            </div>
+
+            <div class="chart_area">
+                <canvas id="total_status_chart"></canvas>
+            </div>
+
+            <div class="chart_area">
+                <canvas id="chara_use_chart"></canvas>
+            </div>
+            
+        </div>
+
+    </main>
+    <script>
+       // データの取得
+       const item_data = JSON.parse('{{ item_data|tojson }}');
+        // グラフの生成
+        var ctx = document.getElementById('Item_Chart').getContext('2d');
+        var Item_Chart = new Chart(ctx,item_data);
+        // データの取得
+        const total_status_data = JSON.parse('{{ total_status_data|tojson }}');
+        // グラフのエレメントの取得
+        const total_status_elm = document.getElementById('total_status_chart').getContext('2d');
+        // グラフの描画
+        const totalStatusChart = new Chart(total_status_elm, total_status_data);
+
+        // データの取得
+        const chara_use_data = JSON.parse('{{ chara_use_data|tojson }}');
+        // グラフのエレメントの取得
+        const chara_use_elm = document.getElementById('chara_use_chart').getContext('2d');
+        // グラフの描画
+        const charaUseChart = new Chart(chara_use_elm, chara_use_data);
+    </script>
 </body>
 </html>
