@@ -22,11 +22,11 @@
         <div class="chart-container">
             
             <div class="chart_area">
-                aaa
+              <canvas id="Item_Chart"></canvas>
             </div>
 
             <div class="chart_area">
-                aaa
+                <canvas id="total_status_chart"></canvas>
             </div>
 
             <div class="chart_area">
@@ -35,9 +35,20 @@
             
         </div>
 
-
     </main>
     <script>
+       // データの取得
+       const item_data = JSON.parse('{{ item_data|tojson }}');
+        // グラフの生成
+        var ctx = document.getElementById('Item_Chart').getContext('2d');
+        var Item_Chart = new Chart(ctx,item_data);
+        // データの取得
+        const total_status_data = JSON.parse('{{ total_status_data|tojson }}');
+        // グラフのエレメントの取得
+        const total_status_elm = document.getElementById('total_status_chart').getContext('2d');
+        // グラフの描画
+        const totalStatusChart = new Chart(total_status_elm, total_status_data);
+      
         // データの取得
         const chara_use_data = JSON.parse('{{ chara_use_data|tojson }}');
         // グラフのエレメントの取得
