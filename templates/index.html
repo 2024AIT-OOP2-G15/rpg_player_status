@@ -26,29 +26,23 @@
             </div>
 
             <div class="chart_area">
-                <canvas id="total_status_chart"></canvas>
+                <canvas id="chara_use_chart"></canvas>
             </div>
 
             <div class="chart_area">
-                <canvas id="chara_use_chart"></canvas>
+                <canvas id="total_status_chart" width="400" height="400"></canvas>
             </div>
             
         </div>
 
     </main>
     <script>
-       // データの取得
-       const item_data = JSON.parse('{{ item_data|tojson }}');
+        // データの取得
+        const item_data = JSON.parse('{{ item_use_raito|tojson }}');
         // グラフの生成
         var ctx = document.getElementById('Item_Chart').getContext('2d');
         var Item_Chart = new Chart(ctx,item_data);
-        // データの取得
-        const total_status_data = JSON.parse('{{ total_status_data|tojson }}');
-        // グラフのエレメントの取得
-        const total_status_elm = document.getElementById('total_status_chart').getContext('2d');
-        // グラフの描画
-        const totalStatusChart = new Chart(total_status_elm, total_status_data);
-      
+
         // データの取得
         const total_status_data = JSON.parse('{{ total_status_data|tojson }}');
         // グラフのエレメントの取得

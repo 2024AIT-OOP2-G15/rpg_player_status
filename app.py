@@ -19,26 +19,28 @@ def index():
     status_list = Status.select()
 
     # Chart.js用データの準備
-    chart_data = {
-        "labels": [],  # キャラ名やID
-        "datasets": [
-            {
-                "label": "総合ステータス",  # グラフのラベル
-                "data": [],  # 各キャラの総合ステータス値
-                "backgroundColor": "rgba(75, 192, 192, 0.5)",
-                "borderColor": "rgba(75, 192, 192, 1)",
-                "borderWidth": 1,
-            }
-        ],
+    total_status_data = {
+        "type":'bar',
+        "data": {
+            "labels": [],  # キャラ名やID
+            "datasets": [
+                {
+                    "label": "総合ステータス",  # グラフのラベル
+                    "data": [],  # 各キャラの総合ステータス値
+                    "backgroundColor": "rgba(75, 192, 192, 0.5)",
+                    "borderColor": "rgba(75, 192, 192, 1)",                    
+                }
+            ],
+        }
     }
 
     # 各キャラの総合ステータスを計算してChart.jsデータに追加
     for s in status_list:
         # キャラ名またはIDをラベルに使用
-        chart_data["labels"].append(s.name if hasattr(s, 'name') else f"ID {s.id}")
+        total_status_data["data"]["labels"].append(s.name.name if hasattr(s, 'name') else f"ID {s.id}")
         # 総合ステータスの計算
         total_status = s.hp + s.at + s.df
-        chart_data["datasets"][0]["data"].append(total_status)
+        total_status_data["data"]["datasets"][0]["data"].append(total_status)
 
     # Statusデータベースを全て取得、格納
     sList = []
@@ -110,13 +112,30 @@ def index():
     chart_data = list(weapon_ratio.values())
 
     item_use_raito = {
-        'chart_labels': chart_labels,
-        'chart_data': chart_data,
-        'chart_title': "武器使用割合",
-        'chart_target': "装備データ"
+        "type":'doughnut',
+        "data": {
+            "labels": chart_labels,
+            "datasets": [
+                {
+                    "label": "使用率",
+                    "data": chart_data,  # 武器の使用率
+                }
+            ]
+        },
+        "options": {
+            "plugins": {
+                "title": {
+                    "display": "true",
+                    "text": '武器の人気度',
+                    "font": {
+                        "size": 30
+                    }
+                }
+            }
+        }
     }
 
-    return render_template('index.html', chart_data=chart_data, chara_use_data=chara_use_data, item_use_raito=item_use_raito)
+    return render_template('index.html', total_status_data=total_status_data, chara_use_data=chara_use_data, item_use_raito=item_use_raito)
 
 if __name__ == '__main__':
     app.run(port=8800,debug=True)
