@@ -29,29 +29,7 @@
         const item_data = JSON.parse('{{ item_data|tojson }}');
         // グラフの生成
         var ctx = document.getElementById('Item_Chart').getContext('2d');
-        var Item_Chart = new Chart(ctx, {
-            type: 'bar', // グラフの種類の変更
-            data: item_data, //入れえたいデータ
-            options: {
-              //optionの追加　ここから下でグラフのサイズを設定できる
-                responsive: true,
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: '装備名'
-                        }
-                    },
-                    y: {
-                        beginAtZero: false,
-                        title: {
-                            display: true,
-                            text: '使用率'
-                        }
-                    }
-                }
-            }
-        });
+        var Item_Chart = new Chart(ctx,item_data);
     </script>
 </body>
 </html>
