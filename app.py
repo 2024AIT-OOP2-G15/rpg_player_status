@@ -17,41 +17,27 @@ def index():
     # 全てのStatusレコードを取得
     status_list = Status.select()
 
-    # キャラごとの最終ステータス合計を計算
+    # Chart.js用データの準備
     chart_data = {
-        "labels": [],  # キャラ名やIDを格納するリスト
+        "labels": [],  # キャラ名やID
         "datasets": [
             {
-                "label": "HP",
-                "data": [],
-                "backgroundColor": "rgba(255, 99, 132, 0.5)",
-                "borderColor": "rgba(255, 99, 132, 1)",
-                "borderWidth": 1,
-            },
-            {
-                "label": "AT",
-                "data": [],
-                "backgroundColor": "rgba(54, 162, 235, 0.5)",
-                "borderColor": "rgba(54, 162, 235, 1)",
-                "borderWidth": 1,
-            },
-            {
-                "label": "DF",
-                "data": [],
+                "label": "総合ステータス",  # グラフのラベル
+                "data": [],  # 各キャラの総合ステータス値
                 "backgroundColor": "rgba(75, 192, 192, 0.5)",
                 "borderColor": "rgba(75, 192, 192, 1)",
                 "borderWidth": 1,
-            },
+            }
         ],
     }
 
+    # 各キャラの総合ステータスを計算してChart.jsデータに追加
     for s in status_list:
-        # キャラ名またはIDをラベルとして使用
+        # キャラ名またはIDをラベルに使用
         chart_data["labels"].append(s.name if hasattr(s, 'name') else f"ID {s.id}")
-        # HP, AT, DFのデータを各データセットに追加
-        chart_data["datasets"][0]["data"].append(s.hp)
-        chart_data["datasets"][1]["data"].append(s.at)
-        chart_data["datasets"][2]["data"].append(s.df)
+        # 総合ステータスの計算
+        total_status = s.hp + s.at + s.df
+        chart_data["datasets"][0]["data"].append(total_status)
 
     # Chart.js用データをテンプレートに渡す
     return render_template('index.html', chart_data=chart_data)
